@@ -25,14 +25,14 @@
 
 (defun solve-part-1 (input)
   (setq idx 0)
-  (while t
+  (setq run t)
+  (while run
     (setq input (eval-optcode input idx))
     ;; (message "Step: %s" input)
-    (setq idx (get-next idx))
-    (catch 'Finished
-      (if (= 99 (nth idx input))
-          (throw 'Finished input))))
+    (if (= 99 (nth idx input))
+        (setq run nil))
+    (setq idx (get-next idx)))
+  (message "Solution: %d" (nth 0 input))
   )
 
 (solve-part-1 input)
-(message "Solution: %d" (nth 0 input))
